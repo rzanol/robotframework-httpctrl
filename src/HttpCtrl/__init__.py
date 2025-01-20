@@ -1241,7 +1241,7 @@ class Server:
     def get_request_body(self):
         """
 
-        Returns body of received request as a string. This function should be called after \`Wait For Request\`,
+        Returns body of received request as \`bytes\`. This function should be called after \`Wait For Request\`,
         otherwise None is returned.
 
         Example how to obtain body of incoming request:
@@ -1256,6 +1256,31 @@ class Server:
 
         """
         return self.__request.get_body()
+
+
+    def get_request_body_as_string(self, encoding='utf-8'):
+        """
+
+        Returns body of received request as a string. This function should be called after \`Wait For Request\`,
+        otherwise None is returned.
+
+        The encoding can be specified as an optional argument.
+
+        Example how to obtain body of incoming request:
+
+        +----------------------------+
+        | Get Request Body As String |
+        +----------------------------+
+
+        .. code:: text
+
+            Get Request Body As String
+
+        """
+        body = self.__request.get_body()
+        if body is None:
+            return None
+        return body.decode(encoding)
 
 
     def get_request_headers(self):
