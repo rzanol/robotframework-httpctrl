@@ -1403,6 +1403,18 @@ class Server:
         response = Response(int(status), None, body, None, self.__response_headers)
         ResponseStorage().push(response)
 
+    def reply_by_json(self, status, json_body=None):
+        """
+
+        Send response using specified HTTP code and body. This function should be called after \`Wait For Request\`.
+
+        `status` [in] (string): HTTP status code for response.
+
+        `json_body` [in] (dict|list|str|bool|int|float): Body that should contain response.
+
+        """
+        response = Response(int(status), None, json.dumps(json_body), None, self.__response_headers)
+        ResponseStorage().push(response)
 
 class Json:
     """
